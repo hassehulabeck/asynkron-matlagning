@@ -15,8 +15,9 @@ function handlaMat(varor, callback) {
     // Gå till affären och köp [varor]. Det tar en stund.
     setTimeout(function () {
         fridge.push(varor);
+        console.log("Nu har jag handlat");
+        callback();
     }, 2000);
-    callback();
 }
 
 let varor = ["potatis", "tomat", "linser"]
