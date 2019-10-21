@@ -1,5 +1,6 @@
 var fridge = [];
 var desk = [];
+let varor = ["potatis", "tomat", "linser"]
 
 function lagaMat() {
     // Laga mat.
@@ -19,8 +20,8 @@ function handlaMat(varor) {
     }, 2000);
 }
 
-let varor = ["potatis", "tomat", "linser"]
-handlaMat(varor);
-lagaMat();
+
+var shoppa = handlaMat(varor);
+shoppa.then(lagaMat());
 
 // Vi måste först handla mat innan vi kan lagaMat.
