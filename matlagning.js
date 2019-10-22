@@ -1,41 +1,48 @@
 var fridge = [];
 var desk = [];
 var matKasse = [];
-let varor = ["potatis", "tomat", "linser"]
+let varor = ["Gurka", "Grädde", "fiskpinnar", "morot"]
 
 const lagaMat = () => {
-    var ingredienser = [];
-    matKasse.forEach((vara) => {
-        for (x = 0; x < vara.length; x++) {
-            // Hacka alla ingredienser...
-            ingredienser.push(vara[x]);
-        }
-        desk.push(vara);
-    });
-
-    for (i = 0; i < 500000000; i++) {
-        // Nothing, men det tar några sekunder. Settimeout funkar dåligt med promises...
-    }
-    return (ingredienser)
-}
-var handlaMat = new Promise((resolve, reject) => {
-    varor.forEach((vara) => {
-        matKasse.push(vara)
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            var ingredienser = [];
+            matKasse.forEach((vara) => {
+                for (x = 0; x < vara.length; x++) {
+                    // Hacka alla ingredienser...
+                    ingredienser.push(vara[x]);
+                }
+                desk.push(vara);
+            });
+            resolve(ingredienser)
+        }, 1500)
     })
-    if (matKasse.length > 0) {
-        console.log("Nu har jag handlat mat")
-        resolve(matKasse);
-    } else {
-        reject("Inga pengar");
-    }
-});
+}
 
-const fridgeEmpty = function () {
+function handlaMat() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            varor.forEach((vara) => {
+                matKasse.push(vara)
+            })
+            if (matKasse.length > 0) {
+                resolve("Nu har jag handlat mat")
+            } else {
+                reject("Inga pengar");
+            }
+
+        }, 1000)
+
+    });
+}
+
+
+async function fridgeEmpty() {
     if (fridge.length == 0) {
-        handlaMat
-            .then(lagaMat)
-            .then(fulfilled => console.log(fulfilled))
-            .catch(error => console.error(error.message))
+        const shop = await handlaMat();
+        console.log(shop);
+        const cook = await lagaMat();
+        console.log(cook);
     }
 }
 // Vi måste först handla mat innan vi kan lagaMat.
