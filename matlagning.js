@@ -36,9 +36,10 @@ function handlaMat() {
     });
 }
 
-
+// Async före funktionen, antingen som statement eller expression (var x = async function)
 async function fridgeEmpty() {
     if (fridge.length == 0) {
+        // Await framför den funktion, eller det kodblock du vill köra asynkront. Variabeln tar hand om det som returneras.
         const shop = await handlaMat();
         console.log(shop);
         const cook = await lagaMat();
