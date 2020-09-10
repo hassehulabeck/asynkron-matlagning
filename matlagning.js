@@ -1,7 +1,7 @@
 var fridge = [];
 var desk = [];
 var matKasse = [];
-let varor = ["potatis", "tomat", "linser"]
+let varor = ["potatis", "tomat", "linser"];
 
 const lagaMat = () => {
     var ingredienser = [];
@@ -16,17 +16,18 @@ const lagaMat = () => {
     for (i = 0; i < 500000000; i++) {
         // Nothing, men det tar några sekunder. Settimeout funkar dåligt med promises...
     }
-    return (ingredienser)
-}
+    return ingredienser;
+};
 var handlaMat = new Promise((resolve, reject) => {
-    varor.forEach((vara) => {
-        matKasse.push(vara)
-    })
+    // varor.forEach((vara) => {
+    //     matKasse.push(vara)
+    // })
     if (matKasse.length > 0) {
-        console.log("Nu har jag handlat mat")
+        console.log("Nu har jag handlat mat");
         resolve(matKasse);
     } else {
-        reject("Inga pengar");
+        let err = new Error("Inga pengar");
+        reject(err);
     }
 });
 
@@ -34,9 +35,9 @@ const fridgeEmpty = function () {
     if (fridge.length == 0) {
         handlaMat
             .then(lagaMat)
-            .then(fulfilled => console.log(fulfilled))
-            .catch(error => console.error(error.message))
+            .then((fulfilled) => console.log(fulfilled))
+            .catch((error) => console.error(error.message));
     }
-}
+};
 // Vi måste först handla mat innan vi kan lagaMat.
 fridgeEmpty();
